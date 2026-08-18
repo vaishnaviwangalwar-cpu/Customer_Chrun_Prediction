@@ -56,21 +56,21 @@ def load_model_and_encoders():
         
         return model, label_encoder_gender, onehot_encoder_geo, scaler
     except FileNotFoundError as e:
-        st.error(f"❌ Error: Could not find model or encoder files. {str(e)}")
+        st.error(f" Error: Could not find model or encoder files. {str(e)}")
         st.stop()
 
 # Load resources
 model, label_encoder_gender, onehot_encoder_geo, scaler = load_model_and_encoders()
 
 # App Title and Description
-st.title("📊 Customer Churn Prediction")
+st.title("Customer Churn Prediction")
 st.markdown("""
     This application predicts the likelihood of a customer churning (leaving the bank) 
     based on their profile and activity. Enter customer details below to get a prediction.
     """)
 
 # Sidebar for inputs
-st.sidebar.header("📝 Customer Information")
+st.sidebar.header("Customer Information")
 st.sidebar.markdown("---")
 
 # Organize inputs in the sidebar
@@ -89,7 +89,7 @@ with col2_side:
                                help="Number of bank products owned")
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("💰 Financial Information")
+st.sidebar.subheader("Financial Information")
 
 col1_fin, col2_fin = st.sidebar.columns(2)
 
@@ -106,7 +106,7 @@ with col2_fin:
                                        help="Estimated annual salary")
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("✅ Account Status")
+st.sidebar.subheader("Account Status")
 
 col1_status, col2_status = st.sidebar.columns(2)
 
@@ -155,7 +155,7 @@ churn_probability = prediction_proba * 100
 col_pred, col_info = st.columns([2, 1])
 
 with col_pred:
-    st.subheader("🎯 Prediction Result")
+    st.subheader("Prediction Result")
     
     if prediction_proba > 0.5:
         # High churn risk
@@ -181,13 +181,13 @@ with col_pred:
             """, unsafe_allow_html=True)
 
 with col_info:
-    st.subheader("📋 Customer Summary")
+    st.subheader("Customer Summary")
     st.metric("Age", f"{age} years")
     st.metric("Tenure", f"{tenure} years")
     st.metric("Products", num_of_products)
 
 # Display customer details
-st.subheader("👤 Customer Details")
+st.subheader("Customer Details")
 
 detail_col1, detail_col2, detail_col3, detail_col4 = st.columns(4)
 
@@ -208,22 +208,22 @@ with detail_col4:
 
 # Additional insights
 st.markdown("---")
-st.subheader("💡 Insights")
+st.subheader("Insights")
 
 insights = []
 if age > 60:
-    insights.append("⚠️ **Age Factor:** Customer is over 60, which is often associated with higher churn risk.")
+    insights.append("**Age Factor:** Customer is over 60, which is often associated with higher churn risk.")
 if balance == 0:
-    insights.append("⚠️ **Balance:** Zero balance may indicate disengagement with the bank.")
+    insights.append(" **Balance:** Zero balance may indicate disengagement with the bank.")
 if num_of_products < 2:
-    insights.append("💡 **Cross-sell Opportunity:** Customer has less than 2 products. Consider cross-selling.")
+    insights.append(" **Cross-sell Opportunity:** Customer has less than 2 products. Consider cross-selling.")
 if tenure < 2:
-    insights.append("⚠️ **New Customer:** Less than 2 years tenure. New customers need extra engagement.")
+    insights.append("**New Customer:** Less than 2 years tenure. New customers need extra engagement.")
 if is_active_member_binary == 0:
-    insights.append("⚠️ **Activity:** Customer is not actively using their account. May need re-engagement.")
+    insights.append(" **Activity:** Customer is not actively using their account. May need re-engagement.")
 
 if insights:
     for insight in insights:
         st.markdown(f"- {insight}")
 else:
-    st.success("✅ No specific risk factors identified.")
+    st.success("No specific risk factors identified.")
