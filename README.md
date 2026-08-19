@@ -4,8 +4,8 @@ An end-to-end machine learning application that predicts the likelihood of a ban
 
 **Live application:** [customerchrunprediction-2509.streamlit.app](https://customerchrunprediction-2509.streamlit.app)
 
- ![App demo](assets/demo.gif)
- 
+ ![App demo](assets\assets\demo.gif)
+
 ---
 
 ## Table of Contents
